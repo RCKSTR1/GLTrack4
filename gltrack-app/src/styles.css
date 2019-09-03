@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+div.content {
+    margin: 15px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.row-item:not(:first-child) {
+    margin-left: 10px;
+}
+
+.row-item.grow {
+    flex-grow: 1;
+}
+
+.mat-table {
+    width: -webkit-fill-available;
+}

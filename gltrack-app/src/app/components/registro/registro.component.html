@@ -1,0 +1,41 @@
+<h1>Niveles de glucosa</h1>
+
+<mat-card>
+  <mat-card-title>Nuevo registro</mat-card-title>
+  <div class="row">
+    <mat-form-field class="row-item grow">
+      <input matInput placeholder="Nivel de glucosa" [(ngModel)]="nuevoRegistro.Nivel" required>
+    </mat-form-field>
+    <mat-form-field class="row-item grow">
+      <mat-label>Comida</mat-label>
+      <mat-select [(ngModel)]="nuevoRegistro.Comida" required>
+        <mat-option value="Desayuno">Desayuno</mat-option>
+        <mat-option value="Comida">Comida</mat-option>
+        <mat-option value="Cena">Cena</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="row-item grow">
+      <mat-label>Antes o después de alimentos</mat-label>
+      <mat-select [(ngModel)]="nuevoRegistro.AntesDespues">
+        <mat-option value="Antes">Antes</mat-option>
+        <mat-option value="Despues">Después</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="row-item grow">
+      <input matInput type="datetime-local" placeholder="Fecha" [(ngModel)]="nuevoRegistro.Fecha">
+    </mat-form-field>
+    <button class="row-item" mat-button [disabled]="IsInvalid()" (click)="Guardar()">
+      <mat-icon>save</mat-icon> Guardar
+    </button>
+    <button class="row-item" mat-button (click)="LimpiarForma()">
+      <mat-icon>delete</mat-icon> Cancelar
+    </button>
+  </div>
+</mat-card>
+
+<mat-card>
+  <mat-card-title>Mis registros</mat-card-title>
+
+  <app-tabla-registros [registros]="registros" (itemDeleted)="Eliminar($event)"></app-tabla-registros>
+
+</mat-card>
