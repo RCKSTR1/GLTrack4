@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
+import { MedicionGlucosa } from 'src/app/models/models';
 
 @Component({
   selector: 'app-historico-mediciones-chart',
@@ -10,11 +11,16 @@ import { Color, Label } from 'ng2-charts';
 export class HistoricoMedicionesChartComponent implements OnInit {
 
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Nivel de glucosa' },
   ];
   public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+      xAxes: [{
+        display: false
+      }]
+    }
   };
   public lineChartColors: Color[] = [
     {
@@ -26,9 +32,18 @@ export class HistoricoMedicionesChartComponent implements OnInit {
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
+  @Input()
+  set mediciones(value: MedicionGlucosa[]) {
+    this.actualizarDatos(value);
+  }
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  actualizarDatos(mediciones: MedicionGlucosa[]) {
+    this.lineChartData[0].data = mediciones.map(m => m.Nivel);
+    this.lineChartLabels = mediciones.map(m => `${m.Comida} ${m.AntesDespues} ${new Date(Date.parse(m.Fecha.toString())).toDateString()}`);
+  }
 }
