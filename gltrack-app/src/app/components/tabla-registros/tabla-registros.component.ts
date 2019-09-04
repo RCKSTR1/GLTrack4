@@ -20,18 +20,17 @@ export class TablaRegistrosComponent implements OnInit {
 
   @Output() itemDeleted = new EventEmitter<string>();
 
-  dataSource: MatTableDataSource<MedicionGlucosa>;
+  dataSource = new MatTableDataSource<MedicionGlucosa>(this._registros);
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor() {
-    this.dataSource = new MatTableDataSource(this._registros);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(filterValue: string) {

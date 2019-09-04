@@ -43,7 +43,12 @@ export class HistoricoMedicionesChartComponent implements OnInit {
   }
 
   actualizarDatos(mediciones: MedicionGlucosa[]) {
-    this.lineChartData[0].data = mediciones.map(m => m.Nivel);
-    this.lineChartLabels = mediciones.map(m => `${m.Comida} ${m.AntesDespues} ${new Date(Date.parse(m.Fecha.toString())).toDateString()}`);
+    const fechaInicial = new Date();
+    fechaInicial.setMonth(fechaInicial.getMonth() - 1);
+
+    const ultimoMes = mediciones.filter(f => new Date(Date.parse(f.Fecha.toString())) >= fechaInicial);
+
+    this.lineChartData[0].data = ultimoMes.map(m => m.Nivel);
+    this.lineChartLabels = ultimoMes.map(m => `${m.Comida} ${m.AntesDespues} ${new Date(Date.parse(m.Fecha.toString())).toDateString()}`);
   }
 }

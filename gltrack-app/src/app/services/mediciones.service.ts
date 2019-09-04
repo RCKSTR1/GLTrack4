@@ -5,11 +5,16 @@ import { MedicionGlucosa } from '../models/models';
   providedIn: 'root'
 })
 export class MedicionesService {
+  debugMode = true;
   storageKey = 'mediciones';
 
   constructor() {
     if (localStorage.getItem(this.storageKey) === null) {
       localStorage.setItem(this.storageKey, JSON.stringify([] as MedicionGlucosa[]));
+    }
+
+    if (this.debugMode) {
+      this.CrearDatosDePrueba();
     }
   }
 
@@ -20,6 +25,7 @@ export class MedicionesService {
 
   Create(mc: MedicionGlucosa) {
     mc.Id = this.NewGuid();
+    mc.Timestamp = new Date();
 
     const mediciones = this.GetAll();
     mediciones.push(mc);
@@ -41,5 +47,43 @@ export class MedicionesService {
         v = c == 'x' ? r : (r & 0x3 | 0x8);
       return v.toString(16);
     });
+  }
+
+  private CrearDatosDePrueba() {
+    if (this.GetAll().length < 600) {
+      localStorage.setItem(this.storageKey, JSON.stringify([] as MedicionGlucosa[]));
+      const fechaA = new Date();
+      const fechaB = new Date();
+      fechaA.setMonth(fechaA.getMonth() - 24);
+
+      while (fechaA < fechaB) {
+        let medicion = this.CrearMedicionRandom('Desayuno', fechaA);
+        this.Create(medicion);
+        medicion = this.CrearMedicionRandom('Comida', fechaA);
+        this.Create(medicion);
+        medicion = this.CrearMedicionRandom('Cena', fechaA);
+        this.Create(medicion);
+        fechaA.setDate(fechaA.getDate() + 1);
+      }
+    }
+  }
+
+  private CrearMedicionRandom(comida: string, fecha: Date) {
+    let rnd = (Math.random() * 90) + 90;
+    const nivelGlucosa = rnd;
+
+    rnd = (Math.floor(Math.random() * 100) % 2);
+    const antesODespues = rnd === 0 ? 'Antes' : 'Despues';
+
+    const medicion: MedicionGlucosa = {
+      Id: this.NewGuid(),
+      Timestamp: new Date(),
+      Nivel: nivelGlucosa,
+      Comida: comida,
+      AntesDespues: antesODespues,
+      Fecha: fecha
+    };
+
+    return medicion;
   }
 }
