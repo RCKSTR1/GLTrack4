@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './components/nav/nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule, MatButtonModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { MaterialModule } from './modules/material/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { TablaRegistrosComponent } from './components/tabla-registros/tabla-registros.component';
+import { HistoricoMedicionesChartComponent } from './components/historico-mediciones-chart/historico-mediciones-chart.component';
+import { ComparativoSemanalChartComponent } from './components/comparativo-semanal-chart/comparativo-semanal-chart.component';
+import { GlobalNivelesChartComponent } from './components/global-niveles-chart/global-niveles-chart.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,10 @@ import { TablaRegistrosComponent } from './components/tabla-registros/tabla-regi
     NavComponent,
     DashboardComponent,
     RegistroComponent,
-    TablaRegistrosComponent
+    TablaRegistrosComponent,
+    HistoricoMedicionesChartComponent,
+    ComparativoSemanalChartComponent,
+    GlobalNivelesChartComponent
   ],
   imports: [
     BrowserModule,
