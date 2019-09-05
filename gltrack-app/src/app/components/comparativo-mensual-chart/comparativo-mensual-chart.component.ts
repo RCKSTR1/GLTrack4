@@ -35,20 +35,26 @@ export class ComparativoMensualChartComponent implements OnInit {
       return Date.parse(a.Fecha.toString()) - Date.parse(b.Fecha.toString());
     });
 
+    // Obtener un arreglo de años disponibles
     let anos = datos.map(m => new Date(m.Fecha.toString()).getFullYear());
+    // Filtrar duplicados
     anos = anos.filter((val, i) => anos.indexOf(val) === i);
 
     const anoActual = new Date().getFullYear();
     const anoAnterior = anoActual - 1;
-    this.barChartData = [{ label: anoAnterior.toString(), data: [] }, { label: anoActual.toString(), data: [] }];
 
+    // Eliminar datos existentes en la gráfica
+    this.barChartData = [{ label: anoAnterior.toString(), data: [] }, { label: anoActual.toString(), data: [] }];
     this.barChartLabels = [];
+
     const mesActual = new Date().getMonth();
     let iMes = 0;
 
     while (iMes <= mesActual) {
+      // Agregar etiquetas con los nombres de cada mes desde Enero hasta el mes actual
       this.barChartLabels.push(this.nombreMeses[iMes]);
 
+      // Obtener promedio mensual del año actual y el anterior
       this.barChartData[0].data.push(this.getPromedioMediciones(anoAnterior, iMes, datos));
       this.barChartData[1].data.push(this.getPromedioMediciones(anoActual, iMes, datos));
 
@@ -62,12 +68,14 @@ export class ComparativoMensualChartComponent implements OnInit {
     let cantidadMediciones = 0;
     let suma = 0;
 
+    // Filtrar las mediciones del mes y año que se desea promediar
     datosFiltrados = datos.filter(f =>
       new Date(f.Fecha.toString()).getFullYear() === ano
       && new Date(f.Fecha.toString()).getMonth() === mes
     );
 
     if (datosFiltrados.length > 0) {
+      // Obtener la suma de los valores de las mediciones a promediar
       suma = datosFiltrados.map(m => m.Nivel).reduce((a, b) => a + b);
       cantidadMediciones = datosFiltrados.length;
       promedio = suma / cantidadMediciones;
