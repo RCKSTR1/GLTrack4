@@ -12,8 +12,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { TablaRegistrosComponent } from './components/tabla-registros/tabla-registros.component';
 import { HistoricoMedicionesChartComponent } from './components/historico-mediciones-chart/historico-mediciones-chart.component';
-import { ComparativoSemanalChartComponent } from './components/comparativo-semanal-chart/comparativo-semanal-chart.component';
 import { GlobalNivelesChartComponent } from './components/global-niveles-chart/global-niveles-chart.component';
+import { ComparativoMensualChartComponent } from './components/comparativo-mensual-chart/comparativo-mensual-chart.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +23,8 @@ import { GlobalNivelesChartComponent } from './components/global-niveles-chart/g
     RegistroComponent,
     TablaRegistrosComponent,
     HistoricoMedicionesChartComponent,
-    ComparativoSemanalChartComponent,
-    GlobalNivelesChartComponent
+    GlobalNivelesChartComponent,
+    ComparativoMensualChartComponent
   ],
   imports: [
     BrowserModule,

@@ -32,21 +32,17 @@ export class HistoricoMedicionesChartComponent implements OnInit {
   public lineChartType: ChartType = 'line';
   public lineChartPlugins = [];
 
-  @Input()
-  set mediciones(value: MedicionGlucosa[]) {
-    this.actualizarDatos(value);
-  }
-
   constructor() { }
 
   ngOnInit() {
   }
 
-  actualizarDatos(mediciones: MedicionGlucosa[]) {
+  @Input()
+  set mediciones(datos: MedicionGlucosa[]) {
     const fechaInicial = new Date();
     fechaInicial.setMonth(fechaInicial.getMonth() - 1);
 
-    const ultimoMes = mediciones.filter(f => new Date(Date.parse(f.Fecha.toString())) >= fechaInicial);
+    const ultimoMes = datos.filter(f => new Date(Date.parse(f.Fecha.toString())) >= fechaInicial);
 
     this.lineChartData[0].data = ultimoMes.map(m => m.Nivel);
     this.lineChartLabels = ultimoMes.map(m => `${m.Comida} ${m.AntesDespues} ${new Date(Date.parse(m.Fecha.toString())).toDateString()}`);
