@@ -50,7 +50,7 @@ export class MedicionesService {
   }
 
   private CrearDatosDePrueba() {
-    if (this.GetAll().length < 6000) {
+    if (this.GetAll().length < 2000) {
       localStorage.setItem(this.storageKey, JSON.stringify([] as MedicionGlucosa[]));
       const fechaA = new Date();
       const fechaB = new Date();
