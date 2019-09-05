@@ -50,7 +50,7 @@ export class MedicionesService {
   }
 
   private CrearDatosDePrueba() {
-    if (this.GetAll().length < 600) {
+    if (this.GetAll().length < 6000) {
       localStorage.setItem(this.storageKey, JSON.stringify([] as MedicionGlucosa[]));
       const fechaA = new Date();
       const fechaB = new Date();
@@ -69,7 +69,7 @@ export class MedicionesService {
   }
 
   private CrearMedicionRandom(comida: string, fecha: Date) {
-    let rnd = (Math.random() * 90) + 90;
+    let rnd = (Math.random() * 130) + 60;
     const nivelGlucosa = rnd;
 
     rnd = (Math.floor(Math.random() * 100) % 2);
