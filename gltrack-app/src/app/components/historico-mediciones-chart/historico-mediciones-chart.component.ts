@@ -11,9 +11,9 @@ import { MedicionGlucosa } from 'src/app/models/models';
 export class HistoricoMedicionesChartComponent implements OnInit {
 
   public lineChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Nivel de glucosa' },
+    { data: [], label: 'Nivel de glucosa' },
   ];
-  public lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  public lineChartLabels: Label[] = [];
   public lineChartOptions: ChartOptions = {
     responsive: true,
     scales: {
